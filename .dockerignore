@@ -1,0 +1,46 @@
+# === Python / Wagtail ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+*.log
+*.sqlite3
+*.db
+*.pot
+*.pyc
+*.pyo
+
+# Virtual environments
+.env
+.env.*
+venv/
+.venv/
+ENV/
+env.bak/
+
+# Django-related
+media/
+staticfiles/
+static_root/
+node_modules/
+.vscode/
+.idea/
+
+# === Vite / frontend ===
+frontend/node_modules/
+frontend/.vite/
+frontend/.svelte-kit/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.*
+
+# === Git & OS ===
+.git/
+.gitignore
+.DS_Store
+Thumbs.db
+
+# === Docker artefacts (optional if used) ===
+docker-compose.override.yml
+Dockerfile.dev
