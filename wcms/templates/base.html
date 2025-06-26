@@ -1,8 +1,13 @@
 {% load static wagtailcore_tags wagtailuserbar %}
-
+{% load django_vite %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
+                
+
+        {% vite_hmr_client %}
+        {% vite_asset 'src/main.tsx' %}
+
         <meta charset="utf-8" />
         <title>
             {% block title %}
@@ -29,17 +34,17 @@
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
-        <script id="react-props" type="application/json">
-        {
+        <!-- <script id="react-props" type="application/json">
+        
             "pageTitle": "{{ page.title|escapejs }}",
             "pageBody": {{ page.body|json_script:"pageBody" }}
-        }
-        </script>
+        
+        </script> -->
 
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        <h1 style="background: red;">BASE H1 TEST</h1>
+        
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
