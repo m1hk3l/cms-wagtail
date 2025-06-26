@@ -1,7 +1,8 @@
 from django.db import models
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from modelcluster.fields import ParentalKey
+from wagtail.admin.panels import MultiFieldPanel
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.snippets.models import register_snippet
 
 # add this:
@@ -22,13 +23,15 @@ class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
-    # Add the main_image method:
-    def main_image(self):
-        gallery_item = self.gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
-        else:
-            return None
+
+    # Add this:
+    authors = ParentalManyToManyField('blog.Author', blank=True)
+
+    # ... Keep the main_image method and search_fields definition. Modify your content_panels:
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(["date", "authors"], heading="Blog information"),
+        "intro", "body", "gallery_images"
+    ]
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
