@@ -1,12 +1,25 @@
+from django import forms
 from django.db import models
+
+# New imports added for ClusterTaggableManager, TaggedItemBase
+
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.search import index
+from django import forms
+from django.db import models
+
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from wagtail.models import Page, Orderable
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.snippets.models import register_snippet
 
-# add this:
-from wagtail.search import index
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -18,27 +31,34 @@ class BlogIndexPage(Page):
         context['blogpages'] = blogpages
         return context
     content_panels = Page.content_panels + ["intro"]
+    
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
 
 class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
-
-    # Add this:
     authors = ParentalManyToManyField('blog.Author', blank=True)
 
-    # ... Keep the main_image method and search_fields definition. Modify your content_panels:
+    # Add this:
+    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
+
+    # ... Keep the main_image method and search_fields definition. Then modify the content_panels:
     content_panels = Page.content_panels + [
-        MultiFieldPanel(["date", "authors"], heading="Blog information"),
-        "intro", "body", "gallery_images"
-    ]
+        MultiFieldPanel([
+            "date",
+            FieldPanel("authors", widget=forms.CheckboxSelectMultiple),
 
-    search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('body'),
-    ]
-
-    content_panels = Page.content_panels + ["date", "intro", "body", "gallery_images"]
+            # Add this:
+            "tags",
+        ], heading="Blog information"),
+            "intro", "body", "gallery_images"
+        ]
 
 
 class BlogPageGalleryImage(Orderable):
@@ -65,3 +85,16 @@ class Author(models.Model):
 
     class Meta:
         verbose_name_plural = 'Authors'
+
+class BlogTagIndexPage(Page):
+
+    def get_context(self, request):
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        blogpages = BlogPage.objects.filter(tags__name=tag)
+
+        # Update template context
+        context = super().get_context(request)
+        context['blogpages'] = blogpages
+        return context
