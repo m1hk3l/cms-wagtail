@@ -1,12 +1,18 @@
 {% extends "base.html" %}
-<h2>Dildu</h2>
+
 <!-- load wagtailcore_tags by adding this: -->
 {% load wagtailcore_tags %}
-
+{% load django_vite %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 <!-- replace everything below with: -->
 {% block content %}
+
+<h1>{{ page.title }}</h1>
+  <div id="react-root"></div>  {# 👈 React mounts here #}
+
+  {% vite_asset 'src/main.tsx' %}
+
     {{ page.body|richtext }}
 {% endblock %}

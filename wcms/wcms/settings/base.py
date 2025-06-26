@@ -187,6 +187,6 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 DJANGO_VITE = {
     "default": {
         "manifest_path": os.path.join(STATICFILES_DIRS[0], ".vite", "manifest.json") ,
-        "static_url_prefix": "assets/",
+        "static_url_prefix": "",
     }
 }

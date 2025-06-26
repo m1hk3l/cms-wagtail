@@ -29,6 +29,13 @@
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+        <script id="react-props" type="application/json">
+        {
+            "pageTitle": "{{ page.title|escapejs }}",
+            "pageBody": {{ page.body|json_script:"pageBody" }}
+        }
+        </script>
+
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
