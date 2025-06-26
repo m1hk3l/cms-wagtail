@@ -2,12 +2,12 @@
 ## Integrated Vite into WagTail CMS
 
 **Before you run the containers**
-The host machine needs the following
-Docker
-Python
-Node, npm
+The host machine needs the following  
+- Docker
+- Python
+- Node, npm
 
-For Docker I used Rancher Desktop
+For Docker I used __Rancher Desktop__
 
 __Virtual environment__
 'python -m venv .venv'
