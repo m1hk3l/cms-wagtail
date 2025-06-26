@@ -2,18 +2,13 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from pathlib import Path
+import sys
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DJANGO_VITE = {
-    "default": {
-        "manifest_path": BASE_DIR / "static" / ".vite" / "manifest.json",
-        "static_url_prefix": "assets/",
-    }
-}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -137,7 +132,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "static"),
+    os.path.join(PROJECT_DIR, "vite-static"),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
@@ -189,3 +184,11 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+
+DJANGO_VITE = {
+    "default": {
+        "manifest_path": os.path.join(os.path.join(STATICFILES_DIRS[0]), ".vite", "manifest.json") ,
+        "static_url_prefix": "assets/",
+    }
+}

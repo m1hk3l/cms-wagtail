@@ -10,10 +10,11 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  base: '/static/',  // match Django STATIC_URL if integrating
+  base: '/vite-static/',  
   build: {
     manifest: true,
-    outDir: resolve(__dirname, '../static'), // or wherever your Django expects built assets
+    emptyOutDir: false,
+    outDir: resolve(__dirname, '../wcms/vite-static'), 
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/main.tsx'),
