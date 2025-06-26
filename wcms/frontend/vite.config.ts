@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     manifest: true,
     emptyOutDir: false,
-    outDir: resolve(__dirname, '../wcms/vite-static'), 
+    outDir: resolve(__dirname, '../vite-static'), 
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/main.tsx'),

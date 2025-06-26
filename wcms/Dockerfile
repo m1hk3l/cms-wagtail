@@ -1,4 +1,3 @@
-# Use an official Python runtime based on Debian 12 "bookworm" as a parent image.
 FROM python:3.12-slim-bookworm
 
 # Add user that will be used in the container.
@@ -49,7 +48,7 @@ USER wagtail
 RUN python manage.py collectstatic --noinput --clear
 
 # Runtime command that executes when "docker run" is called, it does the
-# following:
+# following: 
 #   1. Migrate the database.
 #   2. Start the application server.
 # WARNING:

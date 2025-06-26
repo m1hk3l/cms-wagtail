@@ -1,0 +1,18 @@
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# users are encouraged to define aliases within a top-level file in
+# - $ZSH_CUSTOM/aliases.zsh
+# For a full list of active aliases, run `alias`.
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias python=python3 
+alias py=python3
+alias dcd='docker compose down --volumes --remove-orphans --rmi local'
+alias dfmt='docker ps --format "table {{.Names}}\t{{.Status}}" --last'
+alias dlog='docker compose logs'
+alias ddown='docker compose down'
+alias dbuild='docker compose up --build -d'
+alias ssh-add-yubi="ssh-add -s /usr/local/lib/libykcs11.dylib"
+alias dpm='docker compose exec web python manage.py'
+alias dce='docker compose exec'
+alias dc='docker compose'

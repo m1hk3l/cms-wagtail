@@ -1,11 +1,12 @@
-FROM node:24.3-alpine AS vite-builder
+# FROM node:24.3-alpine AS vite-builder
 
-WORKDIR /opt/
-RUN npm create vite@latest frontend -- --template react-ts
-WORKDIR /opt/frontend/
-RUN npm install
-RUN npm run build
-RUN npm install --save-dev @types/node
+# WORKDIR /opt/wcms/
+# # RUN npm create vite@latest frontend -- --template react-ts
+# # WORKDIR /opt/frontend/
+# # RUN npm install
+# # RUN npm run build
+# # RUN npm install --save-dev @types/node
+# COPY wcms/frontend .
 
 FROM python:3.13.3-slim-bullseye AS wagtail-builder
 
@@ -13,6 +14,7 @@ FROM python:3.13.3-slim-bullseye AS wagtail-builder
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+RUN apt-get update && apt-get upgrade -y && apt-get clean
 
 RUN apt-get update \
     && apt-get install -y \
@@ -33,5 +35,5 @@ WORKDIR /opt/wcms/
 COPY wcms/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY wcms/ .
+COPY wcms/frontend .
 
-COPY --from=vite-builder /opt/frontend/dist frontend/

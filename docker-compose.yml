@@ -11,18 +11,21 @@ services:
     environment:
       - 'DJANGO_SECRET_KEY=django-insecure-9e-c64k9x5vjw0o^*w83kkg9#lset2p8i9q!$$bfp2+pei%4h0#'
       - "DJANGO_DEBUG=True"
-      - "DJANGO_SECURE_SSL_REDIRECT=False"  # new
-      - "DJANGO_SECURE_HSTS_SECONDS=0"  # new
-      - "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=False"  # new
-      - "DJANGO_SECURE_HSTS_PRELOAD=False"  # new
-      - "DJANGO_SESSION_COOKIE_SECURE=False"  # new
-      - "DJANGO_CSRF_COOKIE_SECURE=False"  # new
+      - "DJANGO_SECURE_SSL_REDIRECT=False"  
+      - "DJANGO_SECURE_HSTS_SECONDS=0"  
+      - "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=False"  
+      - "DJANGO_SECURE_HSTS_PRELOAD=False"  
+      - "DJANGO_SESSION_COOKIE_SECURE=False"  
+      - "DJANGO_CSRF_COOKIE_SECURE=False"  
+    env_file:
+      - .env.local
+      
   db:
     image: postgres:17
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    env_file:
+      - .env.local
 
 volumes:
   postgres_data:
