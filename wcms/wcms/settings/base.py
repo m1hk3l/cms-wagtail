@@ -53,7 +53,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "wcms.urls"
-print("BASE_DIR for temp", BASE_DIR)
 
 TEMPLATES = [
     {
