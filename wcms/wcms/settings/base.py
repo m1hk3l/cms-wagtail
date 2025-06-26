@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     
     # custom apps
     "accounts.apps.AccountsConfig",
+    "blog",
 ]
 
 MIDDLEWARE = [
