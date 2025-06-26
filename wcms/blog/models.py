@@ -2,6 +2,7 @@ from django.db import models
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
 from modelcluster.fields import ParentalKey
+from wagtail.snippets.models import register_snippet
 
 # add this:
 from wagtail.search import index
@@ -45,3 +46,19 @@ class BlogPageGalleryImage(Orderable):
     caption = models.CharField(blank=True, max_length=250)
 
     panels = ["image", "caption"]
+
+@register_snippet
+class Author(models.Model):
+    name = models.CharField(max_length=255)
+    author_image = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+
+    panels = ["name", "author_image"]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Authors'
