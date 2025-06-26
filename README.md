@@ -1,5 +1,5 @@
-# Website editor for e-commerce solution
-## CMS created with wagtail
+# WTV: __What The Vite__ : WagTail + Vite
+## Integrated Vite into WagTail CMS
 
 **Before you run the containers**
 The host machine needs the following
