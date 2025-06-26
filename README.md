@@ -80,7 +80,7 @@ Then you can run docker commands like so
 ```
 dpm makemigrations 
 #instead of
-docker compose exec web
+docker compose exec web python manage.py makemigrations
 
 dc up --build -d
 dc up
