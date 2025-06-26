@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
+    #third party 
+    "django_vite",
+    
     # custom apps
     "accounts.apps.AccountsConfig",
 ]

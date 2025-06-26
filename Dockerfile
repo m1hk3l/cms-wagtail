@@ -1,11 +1,21 @@
-FROM python:3.13.3-slim-bullseye
+FROM node:24.3-alpine AS vite-builder
+
+WORKDIR /opt/
+RUN npm create vite@latest frontend -- --template react-ts
+WORKDIR /opt/frontend/
+RUN npm install
+RUN npm run build
+RUN npm install --save-dev @types/node
+
+FROM python:3.13.3-slim-bullseye AS wagtail-builder
 
 # Set environment variables
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update \
+    && apt-get install -y \
     build-essential \
     libpq-dev \
     libjpeg-dev \
@@ -18,10 +28,10 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
-# Set work directory
-WORKDIR /opt/wcms/
 
-# Install dependencies
+WORKDIR /opt/wcms/
 COPY wcms/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY wcms/ .
+
+COPY --from=vite-builder /opt/frontend/dist frontend/
