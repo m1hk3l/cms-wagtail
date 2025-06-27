@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     
     #third party 
     "django_vite",
+    "base",
     
     # custom apps
     "accounts.apps.AccountsConfig",
