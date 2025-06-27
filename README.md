@@ -31,6 +31,7 @@ npm install --save-dev @types/node
 
 ### then setup manifest file
 // vite.config.ts
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve, dirname } from 'path';
@@ -40,12 +41,17 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+//Vite's manifest file is read by Django
+//So I put it where Django has access
+// My Vite project is inside django project
+// So 1 level up
 export default defineConfig({
   plugins: [react()],
-  base: '/static/',  // match Django STATIC_URL if integrating
+  base: '/vite-static/',  
   build: {
     manifest: true,
-    outDir: resolve(__dirname, '../static'), // or wherever your Django expects built assets
+    emptyOutDir: false,
+    outDir: resolve(__dirname, '../vite-static'), 
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/main.tsx'),
@@ -53,6 +59,7 @@ export default defineConfig({
     },
   },
 });
+
 
 ```
 
@@ -89,4 +96,19 @@ dc down
 docker compose up --build -d
 docker compose down
 docker compose up
+```
+
+## On first run
+```
+
+docker compose up --build -d
+# check the database connection
+docker compose exec web python manage.py check --database default
+# or if you use the awesome aliases
+# dpm check --database default
+If 0 issues are reported then the default configuration from
+settings/base.py [DATABASE] is used to connect
+dpm makemigrations
+dpm migrate
+# site should be running now
 ```
