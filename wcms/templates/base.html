@@ -1,14 +1,17 @@
 {% load static wagtailcore_tags wagtailuserbar %}
-{% load django_vite %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-                
-
-         {% block vite %}
-            {% vite_hmr_client %}
-            {% vite_asset 'src/main.tsx' %}
-        {% endblock %}
+        {% load django_vite %}
+        {% if debug %}
+        {% vite_hmr_client %}
+        {% vite_asset 'main' %}
+        {% else %}
+        <!-- In production, pulls from your built manifest -->
+        {% vite_asset 'main' %}
+        {% endif %}
+        
 
         <meta charset="utf-8" />
         <title>
