@@ -5,8 +5,10 @@
     <head>
                 
 
-        {% vite_hmr_client %}
-        {% vite_asset 'src/main.tsx' %}
+         {% block vite %}
+            {% vite_hmr_client %}
+            {% vite_asset 'src/main.tsx' %}
+        {% endblock %}
 
         <meta charset="utf-8" />
         <title>
@@ -44,8 +46,6 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        
-        {% wagtailuserbar %}
         {% include "base/includes/header.html" %}
 
         {% block content %}{% endblock %}
