@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 
+
 options = Options()
 options.headless = False
 options.binary_location = "/Users/mihkelk/.local/bin/firefox-developer"
