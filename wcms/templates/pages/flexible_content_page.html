@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-8 px-4 space-y-12">
+  {% for block in page.body %}
+    {% if block.block_type == 'text_block' %}
+      <div class="prose prose-lg max-w-none">
+        {{ block.value|richtext }}
+      </div>
+    {% elif block.block_type == 'image_block' %}
+      {% image block.value original as img %}
+      <div class="max-w-xl mx-auto">
+        <img src="{{ img.url }}" alt="{{ img.alt }}" class="rounded w-full max-h-[600px] object-contain" />
+      </div>
+    {% elif block.block_type == 'image_text_block' %}
+      <div class="md:flex gap-6 items-start">
+        {% image block.value.image original as img %}
+        <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full md:w-1/2 rounded" />
+        <div class="prose prose-base mt-4 md:mt-0 max-w-none">
+          {{ block.value.text|richtext }}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

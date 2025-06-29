@@ -5,12 +5,6 @@
     <head>
         {% load django_vite %}
         {% vite_react_refresh %}
-        
-
-
-
-        
-
         <meta charset="utf-8" />
         <title>
             {% block title %}
@@ -33,16 +27,12 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/wcms.css' %}">
+        {% vite_asset 'src/main.tsx' %}
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
-        <!-- <script id="react-props" type="application/json">
         
-            "pageTitle": "{{ page.title|escapejs }}",
-            "pageBody": {{ page.body|json_script:"pageBody" }}
-        
-        </script> -->
 
     </head>
 

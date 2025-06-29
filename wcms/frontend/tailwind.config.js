@@ -1,3 +1,4 @@
+import typography from '@tailwindcss/typography';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,6 +10,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: ['tw-animate-css'],
+  plugins: [
+    'tw-animate-css',
+    typography
+  ],
 }
 
