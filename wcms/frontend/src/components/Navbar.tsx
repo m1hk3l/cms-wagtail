@@ -21,7 +21,7 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-silver-100 border-b border-gray-300">
+    <nav className="bg-gray-100 border-b border-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="text-lg font-semibold">Your Site</div>

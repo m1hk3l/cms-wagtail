@@ -4,7 +4,7 @@ export default {
     "../templates/*.html",
     "../templates/**/*.html",
     "../templates/base/header.html",
-    " './src/**/*.{js,ts,jsx,tsx,html}',"
+      "./src/**/*.{js,ts,jsx,tsx,html}",
   ],
   theme: {
     extend: {},
