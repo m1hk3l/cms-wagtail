@@ -1,13 +1,15 @@
-{% load wagtailcore_tags navigation_tags %}
-
+{% load wagtailcore_tags navigation_tags django_vite %}
 <header>
     {% get_site_root as site_root %}
-    <nav>
-        <p>
-        <a href="{% pageurl site_root %}">Home</a> |
-        {% for menuitem in site_root.get_children.live.in_menu %}
-            <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
-        {% endfor %}
-        </p>
-    </nav>
+    {% vite_react_refresh %}
+    {% vite_asset 'src/main.tsx' %}
+
+    <div id="navbar"
+         data-menu='[
+             {"title": "Home", "url": "{% pageurl site_root %}"},
+             {% for menuitem in site_root.get_children.live.in_menu %}
+                 {"title": "{{ menuitem.title }}", "url": "{% pageurl menuitem %}"}{% if not forloop.last %},{% endif %}
+             {% endfor %}
+         ]'>
+    </div>
 </header>

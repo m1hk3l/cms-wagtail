@@ -4,13 +4,11 @@
 <html lang="en">
     <head>
         {% load django_vite %}
-        {% if debug %}
-        {% vite_hmr_client %}
-        {% vite_asset 'main' %}
-        {% else %}
-        <!-- In production, pulls from your built manifest -->
-        {% vite_asset 'main' %}
-        {% endif %}
+        {% vite_react_refresh %}
+        
+
+
+
         
 
         <meta charset="utf-8" />

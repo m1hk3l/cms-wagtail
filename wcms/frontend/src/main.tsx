@@ -1,8 +1,17 @@
-
+import '@/index.css'
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { Navbar } from './components/Navbar';
 
-const root = document.getElementById('react-root');
-if (root) {
-  ReactDOM.createRoot(root).render(<App />);
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const navbarEl = document.getElementById('navbar');
+  if (navbarEl) {
+    ReactDOM.createRoot(navbarEl).render(
+      <React.StrictMode>
+        <Navbar />
+      </React.StrictMode>,
+    );
+  } else {
+    console.error("Navbar element (#navbar) not found on DOMContentLoaded");
+  }
+});
