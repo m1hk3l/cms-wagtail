@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <main class="max-w-5xl mx-auto px-4 py-12 space-y-16">
+    <h1 class="text-4xl font-bold text-center mb-10">{{ page.title }}</h1>
+
+    {% for block in page.body %}
+      {{ block }}
+    {% endfor %}
+  </main>
+{% endblock %}

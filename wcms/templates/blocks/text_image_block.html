@@ -1,0 +1,46 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+{% image self.image width-800 as img %}
+
+
+<section class="w-full my-12">
+  <div class="flex flex-row items-start gap-6 max-w-6xl mx-auto px-4">
+
+    {% if self.layout == "image_right" %}
+      <!-- TEXT LEFT -->
+      <div class="w-1/2">
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          {{ self.text|richtext }}
+        </div>
+      </div>
+
+      <!-- IMAGE RIGHT -->
+      <div class="w-1/2">
+        <img
+          src="{{ img.url }}"
+          alt="{{ img.alt }}"
+          class="w-full h-auto max-h-[500px] object-cover rounded-xl shadow-md"
+          loading="lazy"
+        >
+      </div>
+    {% else %}
+      <!-- IMAGE LEFT -->
+      <div class="w-1/2">
+        <img
+          src="{{ img.url }}"
+          alt="{{ img.alt }}"
+          class="w-full h-auto max-h-[500px] object-cover rounded-xl shadow-md"
+          loading="lazy"
+        >
+      </div>
+
+      <!-- TEXT RIGHT -->
+      <div class="w-1/2">
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          {{ self.text|richtext }}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+

@@ -1,11 +1,11 @@
 import typography from '@tailwindcss/typography';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "../templates/*.html",
-    "../templates/**/*.html",
-    "../templates/base/header.html",
-      "./src/**/*.{js,ts,jsx,tsx,html}",
+    "../templates/**/*.html",       // ✅ scans root-level templates
+    "../wcms/templates/**/*.html",  // ✅ scans app-level templates
+    "./src/**/*.{js,ts,jsx,tsx,html}", // ✅ frontend source
   ],
   theme: {
     extend: {},
@@ -14,5 +14,4 @@ export default {
     'tw-animate-css',
     typography
   ],
-}
-
+};
