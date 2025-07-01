@@ -46,17 +46,17 @@ class IllustrativeImageBlock(blocks.StructBlock):
         label = "Image"
         
 class StudioActivityCard(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    description = blocks.TextBlock(required=True)
+    title = blocks.CharBlock(required=False)
+    description = blocks.TextBlock(required=False)
     image = ImageChooserBlock(required=True)
-    link = blocks.PageChooserBlock(required=True)
+    link = blocks.PageChooserBlock(required=False)
 
     class Meta:
         icon = "doc-full"
         label = "Studio Activity"
 
 class StudioActivitiesBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True, default="Mida saab akvarellistuudios teha?")
+    heading = blocks.CharBlock(required=False, default="Mida saab akvarellistuudios teha?")
     cards = blocks.ListBlock(StudioActivityCard())
 
     class Meta:
