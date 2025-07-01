@@ -1,0 +1,14 @@
+{% load wagtailimages_tags %}
+
+{% image self.image original as img %}
+
+<section class="w-full my-8">
+  <div class="w-full">
+    <img
+      src="{{ img.url }}"
+      alt="{{ img.alt }}"
+      class="w-full h-auto object-cover rounded-none shadow-none"
+      loading="lazy"
+    >
+  </div>
+</section>

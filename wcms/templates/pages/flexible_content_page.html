@@ -21,6 +21,8 @@
           {{ block.value.text|richtext }}
         </div>
       </div>
+    {% elif block.block_type == 'studio_activities' %}
+      {% include_block block %}
     {% endif %}
   {% endfor %}
 </div>

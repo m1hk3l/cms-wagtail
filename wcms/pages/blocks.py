@@ -2,6 +2,7 @@
 
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.blocks import PageChooserBlock
 
 class TextImageBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(features=["bold", "italic", "link"])
@@ -15,3 +16,30 @@ class TextImageBlock(blocks.StructBlock):
         template = "blocks/text_image_block.html"
         icon = "image"
         label = "Text + Image"
+
+class IllustrativeImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    
+    class Meta:
+        template = "blocks/full_width_image_block.html"
+        icon = "image"
+        label = "Image"
+        
+class StudioActivityCard(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    description = blocks.TextBlock(required=True)
+    image = ImageChooserBlock(required=True)
+    link = blocks.PageChooserBlock(required=True)
+
+    class Meta:
+        icon = "doc-full"
+        label = "Studio Activity"
+
+class StudioActivitiesBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=True, default="Mida saab akvarellistuudios teha?")
+    cards = blocks.ListBlock(StudioActivityCard())
+
+    class Meta:
+        template = "blocks/studio_activities_block.html"
+        icon = "placeholder"
+        label = "Studio Activities"

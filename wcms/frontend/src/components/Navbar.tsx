@@ -6,9 +6,15 @@ interface MenuItem {
   url: string;
 }
 
-export const Navbar = () => {
+interface NavbarProps {
+  menu: MenuItem[];
+  siteName: string;
+}
+
+export const Navbar = ({ menu }: NavbarProps) => {
   const [open, setOpen] = useState(false);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [siteName, setSiteName] = useState("Akvarellistuudio");
 
   useEffect(() => {
     const navbarEl = document.getElementById('navbar');
@@ -17,14 +23,20 @@ export const Navbar = () => {
       if (data) {
         setMenuItems(JSON.parse(data));
       }
+      const name = navbarEl.getAttribute('data-site-name');
+      console.log("DATA-SITE-NAME FROM DOM:", name); // <- Add this
+    if (name) {
+      setSiteName(name);
     }
-  }, []);
+    }
+    
+  }, [menu]);
 
   return (
     <nav className="bg-gray-100 border-b border-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="text-lg font-semibold">Your Site</div>
+          <div className="text-lg font-semibold">{siteName}</div>
           <div className="hidden md:flex space-x-4">
             {menuItems.map((item) => (
               <a key={item.url} href={item.url} className="hover:text-black">

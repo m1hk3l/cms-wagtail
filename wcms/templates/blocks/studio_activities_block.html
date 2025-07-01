@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+<section class="py-12 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8">{{ self.heading }}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for card in self.cards %}
+        {% image card.image fill-400x300 as img %}
+        <a href="{{ card.link.url }}" class="block bg-gray-50 hover:bg-white border border-gray-200 rounded-xl shadow transition hover:shadow-lg overflow-hidden">
+          <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">{{ card.title }}</h3>
+            <p class="text-gray-700 text-sm">{{ card.description }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
