@@ -9,12 +9,12 @@ from .blocks import StudioActivitiesBlock
 class FlexibleContentPage(Page):
     parent_page_types = ['home.HomePage', 'wagtailcore.Page']
     body = StreamField([
-        ('text_block', blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'bold', 'italic', 'link'])),
-        ('image_block', ImageChooserBlock()),
-        ('image_text_block', blocks.StructBlock([
-            ('image', ImageChooserBlock(required=True)),
-            ('text', blocks.RichTextBlock(required=False)),
+        ('text_block', blocks.RichTextBlock(features=[
+        'h1', 'h2', 'h3', 'bold', 'italic', 'link',
+        'left', 'center', 'right', 'justify'
         ])),
+        ('image_block', ImageChooserBlock()),
+        ('image_text_block', TextImageBlock()),
         ('studio_activities', StudioActivitiesBlock()),
     ], use_json_field=True)
 
